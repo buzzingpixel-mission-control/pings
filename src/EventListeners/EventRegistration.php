@@ -10,5 +10,6 @@ class EventRegistration
 {
     public static function register(OrderedProviderInterface $provider): void
     {
+        $provider->addSubscriber(Routing::class, Routing::class);
     }
 }
