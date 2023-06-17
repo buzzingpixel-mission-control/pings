@@ -29,7 +29,7 @@ class PingRecordCollection
         $record = $this->firstOrNull();
 
         if ($record === null) {
-            throw new RuntimeException('No record found');
+            throw new RuntimeException('No ping record found');
         }
 
         return $record;
