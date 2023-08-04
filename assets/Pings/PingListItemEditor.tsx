@@ -67,6 +67,7 @@ const PingListItemEditor = (
             title: 'Project',
             name: 'project_id',
             renderInput: FormInputProjects,
+            initialValue: item.projectId,
             setValue,
         },
     ] as Array<FormInput>;

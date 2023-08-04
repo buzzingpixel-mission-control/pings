@@ -67,6 +67,7 @@ var PingListItemEditor = function (_a) {
             title: 'Project',
             name: 'project_id',
             renderInput: buzzingpixel_mission_control_frontend_core_1.FormInputProjects,
+            initialValue: item.projectId,
             setValue: setValue,
         },
     ];
