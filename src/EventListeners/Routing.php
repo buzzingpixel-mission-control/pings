@@ -7,6 +7,7 @@ namespace MissionControlPings\EventListeners;
 use MissionControlBackend\Http\ApiApplyRoutesEvent;
 use MissionControlPings\Pings\AddEdit\PatchArchivePingAction;
 use MissionControlPings\Pings\AddEdit\PatchEditPingAction;
+use MissionControlPings\Pings\AddEdit\PatchUnArchivePingAction;
 use MissionControlPings\Pings\AddEdit\PostAddPingAction;
 use MissionControlPings\Pings\GetPingsListAction;
 use MissionControlPings\Pings\GetPingsListArchivedAction;
@@ -20,5 +21,6 @@ class Routing
         PostAddPingAction::registerRoute($event);
         PatchEditPingAction::registerRoute($event);
         PatchArchivePingAction::registerRoute($event);
+        PatchUnArchivePingAction::registerRoute($event);
     }
 }
