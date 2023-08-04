@@ -14,7 +14,7 @@ import AddPingOverlay from './AddPingOverlay';
 import { pingStatusList } from './Pings';
 import PingList from './PingList';
 
-function classNames (...classes) {
+function classNames (...classes: Array<string>) {
     return classes.filter(Boolean).join(' ');
 }
 
