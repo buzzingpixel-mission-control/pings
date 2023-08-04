@@ -10,23 +10,18 @@ use MissionControlBackend\Http\JsonResponse\JsonResponder;
 use MissionControlIdp\Authorize\ResourceServerMiddlewareWrapper;
 use MissionControlPings\Pings\Persistence\FindPingParameters;
 use MissionControlPings\Pings\PingRepository;
-use MissionControlPings\Pings\ValueObjects\ExpectEvery;
-use MissionControlPings\Pings\ValueObjects\NullValue;
-use MissionControlPings\Pings\ValueObjects\ProjectId;
-use MissionControlPings\Pings\ValueObjects\Title;
-use MissionControlPings\Pings\ValueObjects\WarnAfter;
+use MissionControlPings\Pings\ValueObjects\IsActive;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 use function assert;
-use function is_array;
 use function is_string;
 
-readonly class PatchEditPingAction
+readonly class PatchArchivePingAction
 {
     public static function registerRoute(ApplyRoutesEvent $event): void
     {
-        $event->patch('/pings/edit/{id}', self::class)
+        $event->patch('/pings/archive/{id}', self::class)
             ->add(ResourceServerMiddlewareWrapper::class);
     }
 
@@ -48,30 +43,12 @@ readonly class PatchEditPingAction
             (new FindPingParameters())->withId($id),
         );
 
-        $rawPostData = $request->getParsedBody();
-
-        $postData = PostedData::fromRawPostData(
-            is_array($rawPostData) ? $rawPostData : [],
-        );
-
-        if ($postData->projectId->toNative() === '') {
-            $projectId = new NullValue();
-        } else {
-            $projectId = ProjectId::fromNative(
-                $postData->projectId->toNative(),
-            );
-        }
-
         return $this->jsonResponder->respond(
             $this->responseFactory->createResponse(
                 $this->repository->savePing(
-                    $ping->with(title: Title::fromNative(
-                        $postData->title->toNative(),
-                    ))->with(expectEvery: ExpectEvery::fromNative(
-                        $postData->expectEvery->toNative(),
-                    ))->with(warnAfter: WarnAfter::fromNative(
-                        $postData->warnAfter->toNative(),
-                    ))->with(projectId: $projectId),
+                    $ping->with(isActive: IsActive::fromNative(
+                        false,
+                    )),
                 ),
             ),
         );
