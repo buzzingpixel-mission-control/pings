@@ -34,6 +34,15 @@ var useQuickStatusFilter_1 = __importDefault(require("./useQuickStatusFilter"));
 var useFilterText_1 = __importDefault(require("./useFilterText"));
 var PingData_1 = require("./PingData");
 var AddPingOverlay_1 = __importDefault(require("./AddPingOverlay"));
+var Pings_1 = require("./Pings");
+var PingList_1 = __importDefault(require("./PingList"));
+function classNames() {
+    var classes = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        classes[_i] = arguments[_i];
+    }
+    return classes.filter(Boolean).join(' ');
+}
 var PingsPage = function (_a) {
     var _b = _a.isArchive, isArchive = _b === void 0 ? false : _b;
     var _c = (0, react_1.useState)(''), pageNameState = _c[0], setPageNameState = _c[1];
@@ -75,7 +84,39 @@ var PingsPage = function (_a) {
             Tabs,
             react_1.default.createElement(buzzingpixel_mission_control_frontend_core_1.NoResultsAddItem, { icon: react_1.default.createElement(solid_1.SignalIcon, null), headline: "No Pings", content: "Would you like to create a Ping?", actionText: "Add New Ping", actionUsesPlusIcon: true, actionButtonOnClick: function () { setAddPingIsOpen(true); } })));
     }
-    return react_1.default.createElement(react_1.default.Fragment, null, "TODO");
+    if (filterText !== '') {
+        pings = pings.filter(function (ping) { return ping.title.toLowerCase().indexOf(filterText.toLowerCase()) > -1
+            || ping.slug.toLowerCase().indexOf(filterText.toLowerCase()) > -1
+            || ping.pingId.toLowerCase().indexOf(filterText.toLowerCase()) > -1; });
+    }
+    if (filterText !== '') {
+        pings = pings.filter(function (ping) { return ping.status === quickStatusFilter; });
+    }
+    return (react_1.default.createElement(react_1.default.Fragment, null,
+        portals(),
+        Tabs,
+        react_1.default.createElement("div", null,
+            react_1.default.createElement("div", { className: "sm:flex sm:mb-4" },
+                react_1.default.createElement("div", { className: "mb-4 sm:mb-0 sm:mr-4" },
+                    react_1.default.createElement("div", null,
+                        react_1.default.createElement("div", { className: "sm:hidden" },
+                            react_1.default.createElement("label", { htmlFor: "statusFilter", className: "sr-only" }, "Select a status filter"),
+                            react_1.default.createElement("select", { id: "statusFilter", name: "statusFilter", className: "block w-full rounded-md border-gray-300 focus:border-cyan-500 focus:ring-cyan-500", defaultValue: quickStatusFilter, onChange: function (e) {
+                                    setQuickStatusFilter(e.target.value);
+                                } }, Pings_1.pingStatusList.map(function (filterStatus) { return (react_1.default.createElement("option", { key: filterStatus.value, value: filterStatus.value }, filterStatus.name)); }))),
+                        react_1.default.createElement("div", { className: "hidden sm:block" },
+                            react_1.default.createElement("nav", { className: "flex space-x-4", "aria-label": "Status Filter" }, Pings_1.pingStatusList.map(function (filterStatus) {
+                                var isCurrent = filterStatus.value === quickStatusFilter;
+                                return (react_1.default.createElement("a", { key: filterStatus.value, href: "#", className: classNames(isCurrent ? 'bg-cyan-600 text-white' : 'bg-gray-100 text-gray-500 hover:text-gray-700', 'rounded-md px-3 py-2 text-sm font-medium'), "aria-current": isCurrent ? 'page' : undefined, onClick: function (e) {
+                                        e.preventDefault();
+                                        setQuickStatusFilter(filterStatus.value);
+                                    } }, filterStatus.name));
+                            }))))),
+                react_1.default.createElement("div", { className: "mb-4 sm:mb-0 grow" },
+                    react_1.default.createElement("input", { type: "text", name: "filter", id: "filter", className: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6", placeholder: "Filter results", value: filterText, onChange: function (e) {
+                            setFilterText(e.target.value);
+                        } })))),
+        react_1.default.createElement(PingList_1.default, { isArchive: isArchive, items: pings })));
 };
 PingsPage.defaultProps = {
     isArchive: false,
