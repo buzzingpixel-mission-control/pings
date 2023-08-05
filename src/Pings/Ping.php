@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace MissionControlPings\Pings;
 
+use MissionControlBackend\Url\ApiUrlGenerator;
 use MissionControlPings\Pings\Persistence\PingRecord;
+use MissionControlPings\Pings\ValueObjects\CheckInUrl;
 use MissionControlPings\Pings\ValueObjects\CreatedAt;
 use MissionControlPings\Pings\ValueObjects\ExpectEvery;
 use MissionControlPings\Pings\ValueObjects\Id;
@@ -26,8 +28,10 @@ readonly class Ping
 {
     use Cloneable;
 
-    public static function fromRecord(PingRecord $record): self
-    {
+    public static function fromRecord(
+        PingRecord $record,
+        ApiUrlGenerator $apiUrlGenerator,
+    ): self {
         if ($record->project_id === null) {
             $projectId = new NullValue();
         } else {
@@ -61,6 +65,11 @@ readonly class Ping
             $lastPingAt,
             $lastNotificationAt,
             CreatedAt::fromNative($record->created_at),
+            CheckInUrl::fromNative(
+                $apiUrlGenerator->generate(
+                    'pings/checkin/' . $record->ping_id,
+                ),
+            ),
         );
     }
 
@@ -77,6 +86,7 @@ readonly class Ping
         public LastPingAt|NullValue $lastPingAt,
         public LastNotificationAt|NullValue $lastNotificationAt,
         public CreatedAt $createdAt,
+        public CheckInUrl $checkInUrl,
     ) {
     }
 
@@ -96,6 +106,7 @@ readonly class Ping
             'lastPingAt' => $this->lastPingAt->toNative(),
             'lastNotificationAt' => $this->lastNotificationAt->toNative(),
             'createdAt' => $this->createdAt->toNative(),
+            'checkInUrl' => $this->checkInUrl->toNative(),
         ];
     }
 

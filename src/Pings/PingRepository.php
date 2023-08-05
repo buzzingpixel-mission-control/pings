@@ -6,6 +6,7 @@ namespace MissionControlPings\Pings;
 
 use Cocur\Slugify\Slugify;
 use MissionControlBackend\ActionResult;
+use MissionControlBackend\Url\ApiUrlGenerator;
 use MissionControlPings\Pings\Persistence\CreatePing;
 use MissionControlPings\Pings\Persistence\FindPingParameters;
 use MissionControlPings\Pings\Persistence\FindPings;
@@ -19,6 +20,7 @@ readonly class PingRepository
         private SavePing $savePing,
         private FindPings $findPings,
         private CreatePing $createPing,
+        private ApiUrlGenerator $apiUrlGenerator,
         private NewPingIdFactory $newPingIdFactory,
     ) {
     }
@@ -55,6 +57,7 @@ readonly class PingRepository
     {
         return Ping::fromRecord(
             $this->findPings->findOne($parameters),
+            $this->apiUrlGenerator,
         );
     }
 
@@ -67,7 +70,10 @@ readonly class PingRepository
             return null;
         }
 
-        return Ping::fromRecord($record);
+        return Ping::fromRecord(
+            $record,
+            $this->apiUrlGenerator,
+        );
     }
 
     public function findAll(
@@ -77,7 +83,10 @@ readonly class PingRepository
 
         /** @phpstan-ignore-next-line */
         return new PingCollection($records->map(
-            static fn (PingRecord $r) => Ping::fromRecord($r)
+            fn (PingRecord $record) => Ping::fromRecord(
+                $record,
+                $this->apiUrlGenerator,
+            )
         ));
     }
 }

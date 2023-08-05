@@ -24,6 +24,7 @@ export declare const PingSchema: z.ZodObject<{
     lastPingAt: z.ZodNullable<z.ZodString>;
     lastNotificationAt: z.ZodNullable<z.ZodString>;
     createdAt: z.ZodString;
+    checkInUrl: z.ZodString;
 }, "strip", z.ZodTypeAny, {
     id?: string;
     projectId?: string;
@@ -37,6 +38,7 @@ export declare const PingSchema: z.ZodObject<{
     lastPingAt?: string;
     lastNotificationAt?: string;
     createdAt?: string;
+    checkInUrl?: string;
 }, {
     id?: string;
     projectId?: string;
@@ -50,6 +52,7 @@ export declare const PingSchema: z.ZodObject<{
     lastPingAt?: string;
     lastNotificationAt?: string;
     createdAt?: string;
+    checkInUrl?: string;
 }>;
 export type Ping = z.infer<typeof PingSchema>;
 export declare const PingsSchema: z.ZodArray<z.ZodObject<{
@@ -65,6 +68,7 @@ export declare const PingsSchema: z.ZodArray<z.ZodObject<{
     lastPingAt: z.ZodNullable<z.ZodString>;
     lastNotificationAt: z.ZodNullable<z.ZodString>;
     createdAt: z.ZodString;
+    checkInUrl: z.ZodString;
 }, "strip", z.ZodTypeAny, {
     id?: string;
     projectId?: string;
@@ -78,6 +82,7 @@ export declare const PingsSchema: z.ZodArray<z.ZodObject<{
     lastPingAt?: string;
     lastNotificationAt?: string;
     createdAt?: string;
+    checkInUrl?: string;
 }, {
     id?: string;
     projectId?: string;
@@ -91,6 +96,7 @@ export declare const PingsSchema: z.ZodArray<z.ZodObject<{
     lastPingAt?: string;
     lastNotificationAt?: string;
     createdAt?: string;
+    checkInUrl?: string;
 }>, "many">;
 export type Pings = z.infer<typeof PingsSchema>;
 export type PingWithViewOptions = Ping & {
@@ -117,4 +123,5 @@ export declare const transformPings: (pings: {
     lastPingAt?: string;
     lastNotificationAt?: string;
     createdAt?: string;
+    checkInUrl?: string;
 }[], projects?: ProjectsWithViewOptions) => PingsWithViewOptions;

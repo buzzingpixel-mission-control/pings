@@ -30,6 +30,7 @@ var react_1 = __importStar(require("react"));
 var react_router_dom_1 = require("react-router-dom");
 var react_2 = require("@headlessui/react");
 var solid_1 = require("@heroicons/react/20/solid");
+var date_1 = __importDefault(require("locutus/php/datetime/date"));
 var PingData_1 = require("./PingData");
 var PingListItemEditor_1 = __importDefault(require("./PingListItemEditor"));
 var archiveActiveStatuses = {
@@ -82,7 +83,9 @@ var PingListItem = function (_a) {
                     react_1.default.createElement("p", null,
                         "Last Ping:",
                         ' ',
-                        react_1.default.createElement("strong", null, item.lastPingAtDate ? item.lastPingAtDate.toLocaleDateString() : 'N/A')),
+                        react_1.default.createElement("strong", null, item.lastPingAtDate
+                            ? "".concat((0, date_1.default)('Y-m-d g:i A', item.lastPingAtDate))
+                            : 'N/A')),
                     react_1.default.createElement("svg", { viewBox: "0 0 2 2", className: "h-0.5 w-0.5 fill-current" },
                         react_1.default.createElement("circle", { cx: 1, cy: 1, r: 1 })),
                     react_1.default.createElement("p", null,

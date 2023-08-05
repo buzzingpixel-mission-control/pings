@@ -8,6 +8,7 @@ import {
 } from 'buzzingpixel-mission-control-frontend-core';
 import { usePingDetailsData } from './PingDetailsData';
 import PageHeader from './PageHeader';
+import PingDetails from './PingDetails';
 
 const PingDetailsPage = () => {
     const { slug } = useParams();
@@ -65,6 +66,7 @@ const PingDetailsPage = () => {
     return (
         <>
             <PageHeader data={data} fromProjectPageSlug={fromProjectPageSlug} />
+            <PingDetails data={data} />
         </>
     );
 };

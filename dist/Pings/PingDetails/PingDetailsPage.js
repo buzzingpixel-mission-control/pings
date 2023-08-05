@@ -31,6 +31,7 @@ var react_router_dom_1 = require("react-router-dom");
 var buzzingpixel_mission_control_frontend_core_1 = require("buzzingpixel-mission-control-frontend-core");
 var PingDetailsData_1 = require("./PingDetailsData");
 var PageHeader_1 = __importDefault(require("./PageHeader"));
+var PingDetails_1 = __importDefault(require("./PingDetails"));
 var PingDetailsPage = function () {
     var slug = (0, react_router_dom_1.useParams)().slug;
     var searchParams = (0, react_router_dom_1.useSearchParams)()[0];
@@ -61,6 +62,7 @@ var PingDetailsPage = function () {
     }
     var fromProjectPageSlug = searchParams.get('fromProjectPageSlug');
     return (react_1.default.createElement(react_1.default.Fragment, null,
-        react_1.default.createElement(PageHeader_1.default, { data: data, fromProjectPageSlug: fromProjectPageSlug })));
+        react_1.default.createElement(PageHeader_1.default, { data: data, fromProjectPageSlug: fromProjectPageSlug }),
+        react_1.default.createElement(PingDetails_1.default, { data: data })));
 };
 exports.default = PingDetailsPage;

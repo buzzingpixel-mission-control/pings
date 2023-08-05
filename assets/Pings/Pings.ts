@@ -53,6 +53,7 @@ export const PingSchema = z.object({
     lastPingAt: z.string().nullable(),
     lastNotificationAt: z.string().nullable(),
     createdAt: z.string(),
+    checkInUrl: z.string(),
 });
 
 export type Ping = z.infer<typeof PingSchema>;

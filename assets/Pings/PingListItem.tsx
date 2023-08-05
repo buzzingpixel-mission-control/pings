@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Transition } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
+import phpDateFormat from 'locutus/php/datetime/date';
 import { useArchivePingMutation } from './PingData';
 import { PingWithViewOptions } from './Pings';
 import PingListItemEditor from './PingListItemEditor';
@@ -106,7 +107,11 @@ const PingListItem = (
                         <p>
                             Last Ping:
                             {' '}
-                            <strong>{item.lastPingAtDate ? item.lastPingAtDate.toLocaleDateString() : 'N/A'}</strong>
+                            <strong>
+                                {item.lastPingAtDate
+                                    ? `${phpDateFormat('Y-m-d g:i A', item.lastPingAtDate)}`
+                                    : 'N/A'}
+                            </strong>
                         </p>
                         <svg viewBox="0 0 2 2" className="h-0.5 w-0.5 fill-current">
                             <circle cx={1} cy={1} r={1} />

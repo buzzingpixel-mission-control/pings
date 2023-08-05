@@ -64,6 +64,7 @@ exports.PingSchema = zod_1.z.object({
     lastPingAt: zod_1.z.string().nullable(),
     lastNotificationAt: zod_1.z.string().nullable(),
     createdAt: zod_1.z.string(),
+    checkInUrl: zod_1.z.string(),
 });
 exports.PingsSchema = zod_1.z.array(exports.PingSchema);
 var transformPing = function (ping, projects) {
