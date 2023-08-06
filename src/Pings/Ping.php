@@ -114,4 +114,12 @@ readonly class Ping
     {
         return $this->with(slug: Slug::fromNative($slug));
     }
+
+    public function lastPingAtOrCreatedAt(): LastPingAt|CreatedAt
+    {
+        /** @phpstan-ignore-next-line */
+        return $this->lastPingAt->isNull() ?
+            $this->createdAt :
+            $this->lastPingAt;
+    }
 }

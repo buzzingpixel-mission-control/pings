@@ -16,5 +16,10 @@ class EventRegistration
             Migrations::class,
             Migrations::class,
         );
+
+        $provider->addSubscriber(
+            Schedule::class,
+            Schedule::class,
+        );
     }
 }

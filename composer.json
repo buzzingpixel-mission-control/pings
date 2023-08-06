@@ -7,7 +7,8 @@
         "ext-redis": "*",
         "buzzingpixel/mission-control-backend-core": "dev-main",
         "buzzingpixel/mission-control-idp": "dev-main",
-        "cocur/slugify": "^4.3"
+        "cocur/slugify": "^4.3",
+        "league/pipeline": "^1.0"
     },
     "require-dev": {
         "doctrine/coding-standard": "^11.0.0",
