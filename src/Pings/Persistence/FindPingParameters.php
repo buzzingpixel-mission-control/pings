@@ -39,6 +39,8 @@ readonly class FindPingParameters extends FetchParameters
         public StringCollection|null $notSlugs = null,
         public StringCollection|null $statuses = null,
         public StringCollection|null $notStatuses = null,
+        public StringCollection|null $pingIds = null,
+        public StringCollection|null $notPingIds = null,
         public bool $lastPingIsNull = false,
         public bool $lastPingIsNotNull = false,
         public bool $lastNotificationIsNull = false,
@@ -124,6 +126,22 @@ readonly class FindPingParameters extends FetchParameters
 
         return $this->with(
             notStatuses: $notStatuses->withString($notStatus),
+        );
+    }
+
+    public function withPingId(string $pingId): static
+    {
+        $pingIds = $this->pingIds ?? new StringCollection();
+
+        return $this->with(pingIds: $pingIds->withString($pingId));
+    }
+
+    public function withNotPingId(string $notPingId): static
+    {
+        $notPingIds = $this->pingIds ?? new StringCollection();
+
+        return $this->with(
+            notPingIds: $notPingIds->withString($notPingId),
         );
     }
 
@@ -409,6 +427,64 @@ readonly class FindPingParameters extends FetchParameters
             );
 
             $query[] = 'AND status NOT IN (' .
+                implode(',', $in) .
+                ')';
+        }
+
+        if (
+            $this->pingIds !== null &&
+            $this->pingIds->count() > 0
+        ) {
+            $in = [];
+
+            $i = 1;
+
+            $this->pingIds->map(
+                static function (string $pingId) use (
+                    &$i,
+                    &$in,
+                    &$params,
+                ): void {
+                    $key = 'ping_id_' . $i;
+
+                    $in[] = ':' . $key;
+
+                    $params[$key] = $pingId;
+
+                    $i++;
+                },
+            );
+
+            $query[] = 'AND ping_id IN (' .
+                implode(',', $in) .
+                ')';
+        }
+
+        if (
+            $this->notPingIds !== null &&
+            $this->notPingIds->count() > 0
+        ) {
+            $in = [];
+
+            $i = 1;
+
+            $this->notPingIds->map(
+                static function (string $notPingId) use (
+                    &$i,
+                    &$in,
+                    &$params,
+                ): void {
+                    $key = 'not_ping_id_' . $i;
+
+                    $in[] = ':' . $key;
+
+                    $params[$key] = $notPingId;
+
+                    $i++;
+                },
+            );
+
+            $query[] = 'AND ping_id NOT IN (' .
                 implode(',', $in) .
                 ')';
         }
