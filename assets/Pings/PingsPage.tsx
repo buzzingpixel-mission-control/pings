@@ -122,7 +122,7 @@ const PingsPage = (
             || ping.pingId.toLowerCase().indexOf(filterText.toLowerCase()) > -1);
     }
 
-    if (filterText !== '') {
+    if (quickStatusFilter !== '') {
         pings = pings.filter((
             ping,
         ) => ping.status === quickStatusFilter);

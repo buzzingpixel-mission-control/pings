@@ -89,7 +89,7 @@ var PingsPage = function (_a) {
             || ping.slug.toLowerCase().indexOf(filterText.toLowerCase()) > -1
             || ping.pingId.toLowerCase().indexOf(filterText.toLowerCase()) > -1; });
     }
-    if (filterText !== '') {
+    if (quickStatusFilter !== '') {
         pings = pings.filter(function (ping) { return ping.status === quickStatusFilter; });
     }
     return (react_1.default.createElement(react_1.default.Fragment, null,
