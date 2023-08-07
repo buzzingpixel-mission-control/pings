@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MissionControlPings\Pings\CheckPings;
+namespace MissionControlPings\Pings\Notifications;
 
 use MissionControlPings\Pings\QueueKey;
 use Redis;
@@ -22,7 +22,9 @@ readonly class AddPingsToQueueFactory
     public function create(): AddPingsToQueue
     {
         $enqueuedKeys = $this->redis->keys(
-            $this->queueKey->getKey('*_check_pings_*'),
+            $this->queueKey->getKey(
+                '*_check_ping_notifications_*',
+            ),
         );
 
         if (count($enqueuedKeys) > 0) {
