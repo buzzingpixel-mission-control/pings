@@ -13,6 +13,7 @@ use MissionControlPings\Pings\Checkin\PingCheckinAction;
 use MissionControlPings\Pings\GetDetails\GetPingDetailsBySlugAction;
 use MissionControlPings\Pings\GetPingsListAction;
 use MissionControlPings\Pings\GetPingsListArchivedAction;
+use MissionControlPings\Pings\GetPingsListForProjectAction;
 
 class Routing
 {
@@ -26,5 +27,6 @@ class Routing
         PatchUnArchivePingAction::registerRoute($event);
         GetPingDetailsBySlugAction::registerRoute($event);
         PingCheckinAction::registerRoute($event);
+        GetPingsListForProjectAction::registerRoute($event);
     }
 }
