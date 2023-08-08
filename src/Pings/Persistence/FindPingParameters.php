@@ -136,6 +136,18 @@ readonly class FindPingParameters extends FetchParameters
         return $this->with(pingIds: $pingIds->withString($pingId));
     }
 
+    /** @param string[] $pingIds */
+    public function withPingIds(array $pingIds): static
+    {
+        $newPingIds = $this->pingIds ?? new StringCollection();
+
+        foreach ($pingIds as $pingId) {
+            $newPingIds = $newPingIds->withString($pingId);
+        }
+
+        return $this->with(pingIds: $newPingIds);
+    }
+
     public function withNotPingId(string $notPingId): static
     {
         $notPingIds = $this->pingIds ?? new StringCollection();

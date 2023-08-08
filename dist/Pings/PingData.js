@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.useEditPingMutation = exports.useArchivePingMutation = exports.useAddPingMutation = exports.usePingData = void 0;
+exports.useArchiveSelectedPingsMutation = exports.useEditPingMutation = exports.useArchivePingMutation = exports.useAddPingMutation = exports.usePingData = void 0;
 var buzzingpixel_mission_control_frontend_core_1 = require("buzzingpixel-mission-control-frontend-core");
 var react_query_1 = require("@tanstack/react-query");
 var Pings_1 = require("./Pings");
@@ -200,3 +200,30 @@ var useEditPingMutation = function (pingId, slug) {
     });
 };
 exports.useEditPingMutation = useEditPingMutation;
+var useArchiveSelectedPingsMutation = function (pings, isArchive) {
+    var pingIds = pings.map(function (ping) { return ping.id; });
+    var invalidateQueryKeysOnSuccess = [
+        '/pings/list',
+        '/pings/list/archived',
+    ];
+    pings.forEach(function (ping) {
+        invalidateQueryKeysOnSuccess.push("/pings/".concat(ping.slug));
+        if (!ping.projectId) {
+            return;
+        }
+        var projectListingUrl = "/pings/list/project/".concat(ping.projectId);
+        if (invalidateQueryKeysOnSuccess.indexOf(projectListingUrl) > -1) {
+            return;
+        }
+        invalidateQueryKeysOnSuccess.push(projectListingUrl);
+    });
+    return (0, buzzingpixel_mission_control_frontend_core_1.useApiMutation)({
+        invalidateQueryKeysOnSuccess: invalidateQueryKeysOnSuccess,
+        prepareApiParams: function () { return ({
+            uri: "/pings/".concat(isArchive ? 'un-archive' : 'archive'),
+            method: buzzingpixel_mission_control_frontend_core_1.RequestMethod.PATCH,
+            payload: { pingIds: pingIds },
+        }); },
+    });
+};
+exports.useArchiveSelectedPingsMutation = useArchiveSelectedPingsMutation;

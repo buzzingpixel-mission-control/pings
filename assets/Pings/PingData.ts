@@ -209,3 +209,40 @@ export const useEditPingMutation = (pingId: string, slug: string) => {
         },
     });
 };
+
+export const useArchiveSelectedPingsMutation = (
+    pings: Pings,
+    isArchive: boolean,
+) => {
+    const pingIds = pings.map((ping) => ping.id);
+
+    const invalidateQueryKeysOnSuccess = [
+        '/pings/list',
+        '/pings/list/archived',
+    ];
+
+    pings.forEach((ping) => {
+        invalidateQueryKeysOnSuccess.push(`/pings/${ping.slug}`);
+
+        if (!ping.projectId) {
+            return;
+        }
+
+        const projectListingUrl = `/pings/list/project/${ping.projectId}`;
+
+        if (invalidateQueryKeysOnSuccess.indexOf(projectListingUrl) > -1) {
+            return;
+        }
+
+        invalidateQueryKeysOnSuccess.push(projectListingUrl);
+    });
+
+    return useApiMutation({
+        invalidateQueryKeysOnSuccess,
+        prepareApiParams: () => ({
+            uri: `/pings/${isArchive ? 'un-archive' : 'archive'}`,
+            method: RequestMethod.PATCH,
+            payload: { pingIds },
+        }),
+    });
+};
