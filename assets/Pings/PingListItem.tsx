@@ -63,8 +63,14 @@ const PingListItem = (
         isSelected = true;
     }
 
+    let selectedClasses = '';
+
+    if (isSelected) {
+        selectedClasses = ' bg-green-50 shadow-lg';
+    }
+
     return (
-        <li>
+        <li className={`px-4${selectedClasses}`}>
             <div className="sm:flex items-center justify-between gap-x-6 py-5">
                 <div className="min-w-0">
                     <div className="flex items-start gap-x-3">

@@ -168,7 +168,7 @@ const PingList = (
                     </Transition>
                 </Menu>
             </div>
-            <div className="bg-white rounded-md shadow-sm px-4">
+            <div className="bg-white rounded-md shadow-sm overflow-hidden">
                 <ul className="divide-y divide-gray-100">
                     {items.map((item) => (
                         <PingListItem

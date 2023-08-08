@@ -62,7 +62,11 @@ var PingListItem = function (_a) {
     if ((selectedItemsManager === null || selectedItemsManager === void 0 ? void 0 : selectedItemsManager.selectedItems.indexOf(item.id)) > -1) {
         isSelected = true;
     }
-    return (react_1.default.createElement("li", null,
+    var selectedClasses = '';
+    if (isSelected) {
+        selectedClasses = ' bg-green-50 shadow-lg';
+    }
+    return (react_1.default.createElement("li", { className: "px-4".concat(selectedClasses) },
         react_1.default.createElement("div", { className: "sm:flex items-center justify-between gap-x-6 py-5" },
             react_1.default.createElement("div", { className: "min-w-0" },
                 react_1.default.createElement("div", { className: "flex items-start gap-x-3" },
