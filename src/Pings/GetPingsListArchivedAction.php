@@ -19,7 +19,7 @@ readonly class GetPingsListArchivedAction
 {
     public static function registerRoute(ApplyRoutesEvent $event): void
     {
-        $event->any('/pings/list/archived', self::class)
+        $event->get('/pings/list/archived', self::class)
             ->add(ResourceServerMiddlewareWrapper::class);
     }
 

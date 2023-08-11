@@ -24,7 +24,7 @@ readonly class GetPingsListForProjectAction
 {
     public static function registerRoute(ApplyRoutesEvent $event): void
     {
-        $event->any(
+        $event->get(
             '/pings/list/project/{projectId}',
             self::class,
         )->add(ResourceServerMiddlewareWrapper::class);

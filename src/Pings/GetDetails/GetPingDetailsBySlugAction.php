@@ -18,7 +18,7 @@ readonly class GetPingDetailsBySlugAction
 {
     public static function registerRoute(ApplyRoutesEvent $event): void
     {
-        $event->any('/pings/{slug}', self::class)
+        $event->get('/pings/{slug}', self::class)
             ->add(ResourceServerMiddlewareWrapper::class);
     }
 

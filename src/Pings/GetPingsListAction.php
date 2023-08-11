@@ -19,7 +19,7 @@ readonly class GetPingsListAction
 {
     public static function registerRoute(ApplyRoutesEvent $event): void
     {
-        $event->any('/pings/list', self::class)
+        $event->get('/pings/list', self::class)
             ->add(ResourceServerMiddlewareWrapper::class);
     }
 
