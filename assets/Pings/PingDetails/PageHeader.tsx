@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-import { Ping, PingWithViewOptions } from '../Pings';
+import { PingWithViewOptions } from '../Pings';
 import PingEditButton from './PingEditButton';
 
 const archiveActiveStatuses = {
