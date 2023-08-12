@@ -28,7 +28,7 @@ readonly class MessageFactory
         $text = [];
 
         if (! $ping->lastNotificationAt->isNull() && $ping->status === Status::MISSING) {
-            $subject[] = 'Reminder:';
+            $text[] = 'Reminder:';
         }
 
         if ($ping->status !== Status::MISSING) {
