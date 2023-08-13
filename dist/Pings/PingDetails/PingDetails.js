@@ -15,7 +15,7 @@ var PingDetails = function (_a) {
                     react_1.default.createElement("div", { className: "px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" },
                         react_1.default.createElement("dt", { className: "text-sm font-medium text-gray-900" }, "Check In URL"),
                         react_1.default.createElement("dd", { className: "mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0" },
-                            react_1.default.createElement("input", { type: "text", className: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6", value: data.checkInUrl, readOnly: true }))),
+                            react_1.default.createElement("input", { type: "text", autoComplete: "off", autoCorrect: "off", autoCapitalize: "off", spellCheck: false, className: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6", value: data.checkInUrl, readOnly: true }))),
                     react_1.default.createElement("div", { className: "px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" },
                         react_1.default.createElement("dt", { className: "text-sm font-medium text-gray-900" }, "Expect Every"),
                         react_1.default.createElement("dd", { className: "mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0" },
