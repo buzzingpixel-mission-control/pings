@@ -92,7 +92,7 @@ const EditPingOverlay = (
         mutation.mutate(data, {
             onSuccess: () => setIsOpen(false),
             onError: (error) => {
-                setErrorMessage(error.message || 'Unable to add monitored url');
+                setErrorMessage(error.message || 'Unable to add ping');
 
                 setIsSaving(false);
             },
@@ -101,7 +101,7 @@ const EditPingOverlay = (
 
     return (
         <EditorShellFloating
-            title="Add New Monitored URL"
+            title="Edit Ping"
             isSaving={isSaving}
             submitButtonText="Submit"
             errorMessage={errorMessage}
