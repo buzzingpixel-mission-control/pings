@@ -19,7 +19,7 @@ var PingStatus;
     PingStatus["healthy"] = "healthy";
     PingStatus["pendingMissing"] = "pendingMissing";
     PingStatus["missing"] = "missing";
-})(PingStatus = exports.PingStatus || (exports.PingStatus = {}));
+})(PingStatus || (exports.PingStatus = PingStatus = {}));
 exports.pingStatusList = [
     {
         name: 'All',
